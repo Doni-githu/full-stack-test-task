@@ -20,7 +20,8 @@ const startApp = () => {
             console.log('Connection has been established successfully.')
         })
         .catch((error) => console.log('Unable to connect to the database:', error))
-    app.listen(8000, () => {
+    const port = process.env.PORT || 8000
+    app.listen(port, () => {
         console.log('Server running on port 8000')
     })
 }
