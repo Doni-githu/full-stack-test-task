@@ -1,6 +1,8 @@
 import express from "express"
 import sequelize from "./sequelize"
 import cors from "cors"
+import dotenv from "dotenv"
+dotenv.config()
 import TodoRoutes from "./routes/todo"
 
 const app = express()
