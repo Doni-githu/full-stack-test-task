@@ -1,13 +1,23 @@
 import express from "express"
 import sequelize from "./sequelize"
-import cors from "cors"
+import cors, { CorsOptions } from "cors"
 import dotenv from "dotenv"
 dotenv.config()
 import TodoRoutes from "./routes/todo"
 
 const app = express()
+const allowlist = ['http://localhost:5173', 'https://frontend-full-stack-test.vercel.app/']
+const corsOptionsDelegate = function (req, callback): void {
+    let corsOptions;
+    if (allowlist.indexOf(req.header('Origin')) !== -1) {
+        corsOptions = { origin: true } // reflect (enable) the requested origin in the CORS response
+    } else {
+        corsOptions = { origin: false } // disable CORS for this request
+    }
+    callback(null, corsOptions) // callback expects two parameters: error and options
+}
 
-app.use(cors({ origin: 'http://localhost:5173', preflightContinue: true }))
+app.use(cors(corsOptionsDelegate))
 app.use(express.json())
 app.use("/todo", TodoRoutes)
 
