@@ -8,7 +8,10 @@ import sequelize from "./sequelize"
 const app = express()
 
 app.use(cors({
-    methods: ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'PATCH']
+    methods: ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'PATCH'],
+    origin(requestOrigin, callback) {
+        callback(null, true)
+    },
 }))
 app.use(express.json())
 app.use("/todo", TodoRoutes)
