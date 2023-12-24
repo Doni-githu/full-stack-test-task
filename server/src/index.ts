@@ -3,12 +3,7 @@ import cors from "cors"
 import dotenv from "dotenv"
 dotenv.config()
 import TodoRoutes from "./routes/todo"
-import { Sequelize } from "sequelize"
-
-// const sequelize = new Sequelize('postgresql://postgres:doni@localhost:5432/postgres')
-
-const sequelize = new Sequelize(process.env.POSTGRESQL_URI)
-
+import sequelize from "./sequelize"
 
 const app = express()
 const allowlist = ['http://localhost:5173', 'https://frontend-full-stack-test.vercel.app/']
@@ -39,7 +34,3 @@ const startApp = () => {
 }
 
 startApp()
-
-export {
-    sequelize
-}
