@@ -6,15 +6,13 @@ import TodoRoutes from "./routes/todo"
 import sequelize from "./sequelize"
 
 const app = express()
-const allowlist = ['http://localhost:5173', 'https://frontend-full-stack-test.vercel.app/']
-const corsOptionsDelegate = function (req, callback): void {
-    let corsOptions;
-    if (allowlist.indexOf(req.header('Origin')) !== -1) {
-        corsOptions = { origin: true } // reflect (enable) the requested origin in the CORS response
+const corsOptionsDelegate = function (origin, callback): void {
+    const allowlist = ['http://localhost:5173', 'https://frontend-full-stack-test.vercel.app/']
+    if (allowlist.indexOf(origin) !== -1) {
+        callback(null, true)
     } else {
-        corsOptions = { origin: false } // disable CORS for this request
+        callback(new Error('Not allowed by CORS'))
     }
-    callback(null, corsOptions) // callback expects two parameters: error and options
 }
 
 app.use(cors(corsOptionsDelegate))
