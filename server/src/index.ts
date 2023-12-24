@@ -7,7 +7,7 @@ import sequelize from "./sequelize"
 
 const app = express()
 const corsOptionsDelegate = function (origin, callback): void {
-    const allowlist = ['http://localhost:5173', 'https://frontend-full-stack-test.vercel.app/']
+    const allowlist = ['http://localhost:5173', 'https://frontend-full-stack-test.vercel.app']
     if (allowlist.indexOf(origin) !== -1) {
         callback(null, true)
     } else {
