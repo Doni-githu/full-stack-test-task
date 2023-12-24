@@ -1,7 +1,10 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const sequelize_1 = require("sequelize");
-const __1 = require("../");
+const sequelize_2 = __importDefault(require("../sequelize"));
 class Todo extends sequelize_1.Model {
 }
 Todo.init({
@@ -20,7 +23,7 @@ Todo.init({
         values: ['completed', 'pending', 'in proccess']
     }
 }, {
-    sequelize: __1.sequelize,
+    sequelize: sequelize_2.default,
     timestamps: true,
     indexes: [{ unique: true, fields: ['title'] }],
 });
