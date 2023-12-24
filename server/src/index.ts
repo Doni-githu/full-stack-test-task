@@ -8,14 +8,7 @@ import sequelize from "./sequelize"
 const app = express()
 
 app.use(cors({
-    origin(origin, callback) {
-        const allowlist = ['http://localhost:5173', 'https://frontend-full-stack-test.vercel.app']
-        if (allowlist.indexOf(origin) !== -1) {
-            callback(null, true)
-        } else {
-            callback(new Error('Not allowed by CORS'))
-        }
-    },
+    origin: true
 }))
 app.use(express.json())
 app.use("/todo", TodoRoutes)
