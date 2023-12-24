@@ -5,15 +5,13 @@ import TodoRoutes from "./routes/todo"
 
 const app = express()
 
+app.use(cors({ origin: 'http://localhost:5173', preflightContinue: true }))
 app.use(express.json())
 app.use("/todo", TodoRoutes)
-// app.use(cors({
-//     origin: ['http://localhost:5173']
-// }))
 
 
 const startApp = () => {
-    sequelize.sync({force: true})
+    sequelize.sync({ force: true })
         .then(() => {
             console.log('Connection has been established successfully.')
         })
