@@ -10,18 +10,7 @@ dotenv_1.default.config();
 const todo_1 = __importDefault(require("./routes/todo"));
 const sequelize_1 = __importDefault(require("./sequelize"));
 const app = (0, express_1.default)();
-const allowlist = ['http://localhost:5173', 'https://frontend-full-stack-test.vercel.app/'];
-const corsOptionsDelegate = function (req, callback) {
-    let corsOptions;
-    if (allowlist.indexOf(req.header('Origin')) !== -1) {
-        corsOptions = { origin: true }; // reflect (enable) the requested origin in the CORS response
-    }
-    else {
-        corsOptions = { origin: false }; // disable CORS for this request
-    }
-    callback(null, corsOptions); // callback expects two parameters: error and options
-};
-app.use((0, cors_1.default)(corsOptionsDelegate));
+app.use((0, cors_1.default)());
 app.use(express_1.default.json());
 app.use("/todo", todo_1.default);
 const startApp = () => {
@@ -30,7 +19,8 @@ const startApp = () => {
         console.log('Connection has been established successfully.');
     })
         .catch((error) => console.log('Unable to connect to the database:', error));
-    app.listen(8000, () => {
+    const port = process.env.PORT || 8000;
+    app.listen(port, () => {
         console.log('Server running on port 8000');
     });
 };
